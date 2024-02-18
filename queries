@@ -1,0 +1,73 @@
+CREATE TABLE Manager (
+    manager_id INT PRIMARY KEY AUTO_INCREMENT,
+    team_count INT,
+    clearance_number VARCHAR(255)
+);
+
+CREATE TABLE Employee (
+    employee_id INT PRIMARY KEY AUTO_INCREMENT,
+    manager_id INT,
+    phone_number VARCHAR(20),
+    pf_number VARCHAR(20),
+    token_number VARCHAR(20),
+    FOREIGN KEY (manager_id) REFERENCES Manager(manager_id)
+);
+
+CREATE TABLE Team (
+    team_id INT PRIMARY KEY AUTO_INCREMENT,
+    manager_id INT,
+    FOREIGN KEY (manager_id) REFERENCES Manager(manager_id)
+);
+
+CREATE TABLE Paygrade (
+    paygrade_id INT PRIMARY KEY AUTO_INCREMENT,
+    paygrade_name VARCHAR(255),
+    salary DECIMAL(10,2)
+);
+
+CREATE TABLE InsurancePolicy (
+    policy_id INT PRIMARY KEY AUTO_INCREMENT,
+    policy_name VARCHAR(255),
+    coverage_details VARCHAR(255)
+);
+
+CREATE TABLE Department (
+    department_id INT PRIMARY KEY AUTO_INCREMENT,
+    department_name VARCHAR(255)
+);
+
+CREATE TABLE Project (
+    project_id INT PRIMARY KEY AUTO_INCREMENT,
+    project_name VARCHAR(255),
+    start_date DATE,
+    end_date DATE
+    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id)
+    
+);
+
+CREATE TABLE Task (
+    task_id INT PRIMARY KEY AUTO_INCREMENT,
+    task_description TEXT,
+    due_date DATE,
+    status VARCHAR(20),
+    project_id INT,
+    FOREIGN KEY (project_id) REFERENCES Project(project_id)
+);
+
+CREATE TABLE Training (
+    training_id INT PRIMARY KEY AUTO_INCREMENT,
+    training_name VARCHAR(255),
+    trainer VARCHAR(255),
+    training_date DATE,
+    duration INT
+);
+
+CREATE TABLE Leave (
+    leave_id INT PRIMARY KEY AUTO_INCREMENT,
+    employee_id INT,
+    leave_type VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    status VARCHAR(20),
+);
+
